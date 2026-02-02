@@ -10,5 +10,8 @@ function createOkrRouteHandler(okrController) {
     router.get("/", (req, res) => {
         okrController.handleOkrGet(req, res);
     });
+    router.post("/", (req, res) => {
+        okrController.handleOkrPost(req, res);
+    });
     return router;
 }

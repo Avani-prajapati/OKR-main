@@ -8,5 +8,8 @@ class OkrController {
     handleOkrGet(req, res) {
         return res.status(200).send(this.okrService.getOkrData());
     }
+    handleOkrPost(req, res) {
+        return res.status(200).send(this.okrService.postOkrData(req));
+    }
 }
 exports.OkrController = OkrController;

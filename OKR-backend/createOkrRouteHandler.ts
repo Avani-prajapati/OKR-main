@@ -6,5 +6,8 @@ export function createOkrRouteHandler(okrController:OkrController)  {
     router.get("/", (req:express.Request, res:express.Response) => {
         okrController.handleOkrGet(req, res);
     });
+    router.post("/", (req:express.Request, res:express.Response) => {
+        okrController.handleOkrPost(req, res);
+    })
     return router;
 }

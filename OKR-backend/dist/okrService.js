@@ -9,5 +9,9 @@ class OkrService {
     getOkrData() {
         return { status: "OK", data: db_json_1.default };
     }
+    postOkrData(req) {
+        console.log("Received OKR data:", req.body);
+        return { status: "OK", message: "OKR created successfully" };
+    }
 }
 exports.OkrService = OkrService;
