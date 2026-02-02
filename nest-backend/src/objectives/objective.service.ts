@@ -1,6 +1,6 @@
 import  { Injectable, Body } from '@nestjs/common';
-import { ObjectiveDto } from './dto/objective.dto';
-import { ObjectiveType } from './interfaces/objective.interface';
+import { ObjectiveDto } from '../dto/objective.dto';
+import { ObjectiveType } from '../interface/objective.interface';
 
 @Injectable()
 export class ObjectiveService{

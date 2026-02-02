@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import {ObjectiveModule} from "./objectives/objective.module";
 import { KeyResultsModule } from './key-results/key-results.module';
-
+import { OkrModule } from './okr/okr.module';
+import { ObjectiveModule } from './objectives/objective.module';
 
 @Module({
-  imports: [ObjectiveModule, KeyResultsModule]
+  imports: [OkrModule, KeyResultsModule, ObjectiveModule],
 })
 export class AppModule {}
