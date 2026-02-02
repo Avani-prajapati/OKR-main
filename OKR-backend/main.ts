@@ -25,7 +25,7 @@ app.use("/health",
 const okrService = new OkrService();
 const okrController = new OkrController(okrService);
 
-app.use("/okr",
+app.use("/okrs",
     createOkrRouteHandler(okrController)
 );
 

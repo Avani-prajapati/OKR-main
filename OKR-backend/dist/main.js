@@ -20,7 +20,7 @@ const healthController = new healthController_1.HealthController(healthService);
 app.use("/health", (0, createHealthRouteHandler_1.createHealthRouteHandler)(healthController));
 const okrService = new okrService_1.OkrService();
 const okrController = new okrController_1.OkrController(okrService);
-app.use("/okr", (0, createOkrRouteHandler_1.createOkrRouteHandler)(okrController));
+app.use("/okrs", (0, createOkrRouteHandler_1.createOkrRouteHandler)(okrController));
 app.listen(port, () => {
     console.log(`Server running on ${port}`);
 });
