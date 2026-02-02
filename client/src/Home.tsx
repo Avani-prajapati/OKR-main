@@ -14,7 +14,7 @@ const Home = () => {
   const fetchAllOkrs = async () => {
     const response = await fetch(`http://localhost:3000/okrs`);
     const data = await response.json();
-    return data.data;
+    return data;
   }
   useEffect(() => {
     fetchAllOkrs().then((data : OkrType[]) => setOkrs(data));

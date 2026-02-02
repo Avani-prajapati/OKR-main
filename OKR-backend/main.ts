@@ -1,34 +1,35 @@
+import type {Request, Response} from "express";
 import express from 'express'
 import cors from 'cors'
-import {HealthController} from "./healthController";
-import {HealthService} from "./healthService";
-import {createHealthRouteHandler} from "./createHealthRouteHandler";
-import {OkrController} from "./okrController";
-import {OkrService} from "./okrService";
-import {createOkrRouteHandler} from "./createOkrRouteHandler";
+import {HealthController} from "./health/healthController";
+import {HealthService} from "./health/healthService";
+import {createOkrRouteHandler} from "./okr/createOkrRouteHandler";
+import {createHealthRouteHandler} from "./health/createHealthRouteHandler";
+import {OkrController} from "./okr/okrController";
+import {OkrService} from "./okr/okrService";
 
 const app = express()
-const port = 3000
-
+app.use(express.json())
 
 app.use(cors())
-app.use(express.json());
+
+
+app.get('/', (req : Request, res : Response) => {
+    res.send('Hello, World!')
+})
+
+
+const okrService = new OkrService();
+const okrController = new OkrController(okrService)
+app.use('/okrs', createOkrRouteHandler(okrController))
+
 
 const healthService = new HealthService();
 const healthController = new HealthController(healthService);
 
-app.use("/health",
-    createHealthRouteHandler(healthController)
-)
+app.use('/health', createHealthRouteHandler(healthController))
 
-
-const okrService = new OkrService();
-const okrController = new OkrController(okrService);
-
-app.use("/okrs",
-    createOkrRouteHandler(okrController)
-);
-
-app.listen(port, () => {
-    console.log(`Server running on ${port}`)
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
 })
