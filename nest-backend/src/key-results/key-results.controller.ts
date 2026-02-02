@@ -11,4 +11,6 @@ export class KeyResultsController {
     getAllKeyResults() {
         return this.keyResultsService.getAllKeyResults();
     }
+
+
 }
