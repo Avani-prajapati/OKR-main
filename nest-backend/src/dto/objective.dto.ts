@@ -1,3 +1,3 @@
 export class ObjectiveDto {
-    objective:string;
+  objective: string;
 }

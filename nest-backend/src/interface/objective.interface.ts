@@ -1,4 +1,4 @@
 export interface ObjectiveType {
-    id: string;
-    objective: string;
+  id: string;
+  objective: string;
 }
