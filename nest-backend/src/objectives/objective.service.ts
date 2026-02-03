@@ -1,15 +1,28 @@
-import  { Injectable, Body } from '@nestjs/common';
-import { ObjectiveDto } from '../dto/objective.dto';
-import { ObjectiveType } from '../interface/objective.interface';
+import { Injectable } from '@nestjs/common';
+import { ObjectiveDto } from './dto/objective.dto';
+import { ObjectiveType } from './interface/objective.interface';
+import { PrismaService } from '../prisma.service';
 
 @Injectable()
-export class ObjectiveService{
-    objectives :ObjectiveType[] = [];
-    getAllObjectives() {
-        return this.objectives;
-    }
-    createObjective(objectiveDto: ObjectiveDto) {
-        this.objectives.push({id:'1',...objectiveDto});
-        return {message: 'Objective created successfully'};
-    }
+export class ObjectiveService {
+  objectives: ObjectiveType[] = [];
+  constructor(private readonly PrismaService: PrismaService) {}
+
+  getAll() {
+    return this.PrismaService.objective.findMany();
+  }
+  create(objectiveDto: ObjectiveDto) {
+    return this.PrismaService.objective.create({ data: objectiveDto });
+  }
+
+  delete(id: string) {
+    return this.PrismaService.objective.delete({ where: { id } });
+  }
+
+  update(id: string, objectiveDto: ObjectiveDto) {
+    return this.PrismaService.objective.update({
+      where: { id },
+      data: objectiveDto,
+    });
+  }
 }
