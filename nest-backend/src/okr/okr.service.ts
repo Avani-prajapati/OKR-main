@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { OkrType } from '../interface/okr.interface';
-import { OkrDtoType } from '../dto/okr.dto';
+import { OkrType } from './interface/okr.interface';
+import { OkrDtoType } from './dto/okr.dto';
 import okrData from '../local/db.json';
 
 @Injectable()
