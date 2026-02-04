@@ -8,8 +8,18 @@ export class ObjectiveService {
   objectives: ObjectiveType[] = [];
   constructor(private readonly PrismaService: PrismaService) {}
 
-  getAll() {
-    return this.PrismaService.objective.findMany();
+  getAll(title: string) {
+    return this.PrismaService.objective.findMany({
+      where: {
+        title: {
+          startsWith: title,
+          mode: 'insensitive',
+        },
+      },
+      include: {
+        keyResults: true,
+      },
+    });
   }
   create(objectiveDto: ObjectiveDto) {
     return this.PrismaService.objective.create({ data: objectiveDto });

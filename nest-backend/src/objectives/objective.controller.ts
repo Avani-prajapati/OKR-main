@@ -6,19 +6,23 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ObjectiveService } from './objective.service';
 import { ObjectiveDto } from './dto/objective.dto';
 import { type ObjectiveType } from './interface/objective.interface';
 
-@Controller('objectives')
+@Controller()
 export class ObjectiveController {
   constructor(private readonly objectiveService: ObjectiveService) {
     this.objectiveService = objectiveService;
   }
   @Get()
-  getAll() {
-    return this.objectiveService.getAll();
+  getAll(@Query('title') title: string) {
+
+    return this.objectiveService.getAll(title);
+
+
   }
 
   @Post()
