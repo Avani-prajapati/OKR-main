@@ -7,10 +7,12 @@ import {
   Patch,
   Post,
   Query,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ObjectiveService } from './objective.service';
 import { ObjectiveDto } from './dto/objective.dto';
 import { type ObjectiveType } from './interface/objective.interface';
+import { CapitalizePipePipe } from '../capitalize-pipe/capitalize-pipe.pipe';
 
 @Controller()
 export class ObjectiveController {
@@ -19,14 +21,11 @@ export class ObjectiveController {
   }
   @Get()
   getAll(@Query('title') title: string) {
-
     return this.objectiveService.getAll(title);
-
-
   }
 
   @Post()
-  create(@Body() objectiveDto: ObjectiveDto) {
+  create(@Body(new CapitalizePipePipe()) objectiveDto: ObjectiveDto) {
     return this.objectiveService.create(objectiveDto);
   }
 

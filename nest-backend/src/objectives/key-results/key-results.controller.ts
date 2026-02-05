@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { KeyResultsService } from './key-results.service';
 import { CreateKeyResultDto } from './dto/create-key-result.dto';
 
-@Controller('key-results')
+@Controller('')
 export class KeyResultsController {
   constructor(private readonly keyResultsService: KeyResultsService) {
     this.keyResultsService = keyResultsService;
