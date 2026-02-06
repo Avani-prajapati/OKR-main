@@ -12,16 +12,17 @@ export class KeyResultsService {
   }
 
   async create(objectiveId: string, createKeyResultDto: CreateKeyResultDto) {
-    console.log(createKeyResultDto);
-    const keyResult = await this.prismaService.keyResult.findFirst({
-      where: { description: createKeyResultDto.description },
-    });
-    if (keyResult) {
-      throw new KeyResultDuplicateError(createKeyResultDto.description);
-    }
+    // console.log(createKeyResultDto);
+    // const keyResult = await this.prismaService.keyResult.findFirst({
+    //   where: { description: createKeyResultDto.description },
+    // });
+    // if (keyResult) {
+    //   throw new KeyResultDuplicateError(createKeyResultDto.description);
+    // }
     return this.prismaService.keyResult.create({
       data: {
         ...createKeyResultDto,
+        isCompleted: false,
         objective: {
           connect: { id: objectiveId },
         },
@@ -30,6 +31,7 @@ export class KeyResultsService {
   }
 
   async getByID(keyResultId: string) {
+    console.log('hi');
     const keyResult = await this.prismaService.keyResult.findUnique({
       where: { id: keyResultId },
     });
