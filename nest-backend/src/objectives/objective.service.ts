@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ObjectiveDto } from './dto/objective.dto';
 import { ObjectiveType } from './interface/objective.interface';
 import { PrismaService } from '../prisma.service';
+import { ObjectiveNotFoundError } from './objective-not-found-error';
 
 @Injectable()
 export class ObjectiveService {
@@ -25,8 +26,16 @@ export class ObjectiveService {
     return this.PrismaService.objective.create({ data: objectiveDto });
   }
 
-  delete(id: string) {
-    return this.PrismaService.objective.delete({ where: { id } });
+  async delete(id: string) {
+    const objective = await this.PrismaService.objective.findUnique({
+      where: { id },
+    });
+    if (!objective) {
+      throw new ObjectiveNotFoundError(id);
+    }
+    return this.PrismaService.objective.delete({
+      where: { id },
+    });
   }
 
   update(id: string, objectiveDto: ObjectiveDto) {
@@ -34,5 +43,16 @@ export class ObjectiveService {
       where: { id },
       data: objectiveDto,
     });
+  }
+
+  async getByID(objectiveId: string) {
+    const objective = await this.PrismaService.objective.findUnique({
+      where: { id: objectiveId },
+      include: { keyResults: true },
+    });
+    if (!objective) {
+      throw new ObjectiveNotFoundError(objectiveId);
+    }
+    return objective;
   }
 }
